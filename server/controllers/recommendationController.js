@@ -1,6 +1,6 @@
 const Favorite = require("../models/Favorite");
 const RecentlyPlayed = require("../models/RecentlyPlayed");
-const Song = require("../models/Song");
+const Song = require("../models/song");
 
 
 const getRecommendations = async (req, res) => {
