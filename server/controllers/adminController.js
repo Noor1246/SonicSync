@@ -1,4 +1,4 @@
-const Song = require("../models/Song");
+const Song = require("../models/song");
 const User = require("../models/User");
 const Favorite = require("../models/Favorite");
 const Playlist = require("../models/Playlist");
