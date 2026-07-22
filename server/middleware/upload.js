@@ -3,38 +3,43 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../config/cloudinary");
 
 
-const imageStorage = new CloudinaryStorage({
+const storage = new CloudinaryStorage({
+
   cloudinary,
-  params:{
-    folder:"sonicsync/images",
-    resource_type:"image",
-  },
-});
+
+  params: async (req, file) => {
+
+    if (file.fieldname === "image") {
+
+      return {
+        folder: "sonicsync/images",
+        resource_type: "image",
+      };
+
+    }
 
 
-const audioStorage = new CloudinaryStorage({
-  cloudinary,
-  params:{
-    folder:"sonicsync/audio",
-    resource_type:"video",
+    if (file.fieldname === "audio") {
+
+      return {
+        folder: "sonicsync/audio",
+        resource_type: "video",
+      };
+
+    }
+
+
+    return {
+      folder:"sonicsync/others"
+    };
+
   },
+
 });
 
 
 const upload = multer({
-
-  storage:(req,file,cb)=>{
-
-    if(file.fieldname==="image"){
-      imageStorage._handleFile(req,file,cb);
-    }
-
-    else if(file.fieldname==="audio"){
-      audioStorage._handleFile(req,file,cb);
-    }
-
-  }
-
+  storage,
 });
 
 
