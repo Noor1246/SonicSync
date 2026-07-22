@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "../api";
 import {
   FaMusic,
   FaHeart,
@@ -11,7 +12,12 @@ import {
 const Stats = () => {
   const [stats, setStats] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+
+const user = {
+  ...storedUser,
+  _id: storedUser?._id || storedUser?.id,
+};
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -19,8 +25,8 @@ const Stats = () => {
         if (!user) return;
 
         const res = await axios.get(
-          `http://localhost:8000/api/stats/${user._id}`
-        );
+  `${API_URL}/api/stats/${user._id}`
+);
 
         setStats(res.data);
       } catch (err) {
@@ -29,7 +35,7 @@ const Stats = () => {
     };
 
     fetchStats();
-  }, [user?._id]);
+  }, []);
 
   if (!stats)
     return (

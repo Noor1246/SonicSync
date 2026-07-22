@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import SongCard from "../components/SongCard";
-
+import API_URL from "../api";
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
 
@@ -11,7 +11,12 @@ const Playlists = () => {
     (state) => state.player
   );
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+
+const user = {
+  ...storedUser,
+  _id: storedUser?._id || storedUser?.id,
+};
 
 
   const fetchPlaylists = async () => {
@@ -19,7 +24,7 @@ const Playlists = () => {
       if (!user) return;
 
       const res = await axios.get(
-        `http://localhost:8000/api/playlists/${user._id}`
+        `${API_URL}/api/playlists/${user._id}`
       );
 
       setPlaylists(res.data);
@@ -42,7 +47,7 @@ const Playlists = () => {
 
     try {
         await axios.put(
-            `http://localhost:8000/api/playlists/${playlistId}`,
+            `${API_URL}/api/playlists/${playlistId}`,
         {
             name: newName,
         }
@@ -66,7 +71,7 @@ const Playlists = () => {
     try {
 
         await axios.delete(
-            `http://localhost:8000/api/playlists/${playlistId}`
+            `${API_URL}/api/playlists/${playlistId}`
         );
 
         fetchPlaylists();
@@ -80,7 +85,7 @@ const Playlists = () => {
     try {
 
       await axios.delete(
-        `http://localhost:8000/api/playlists/${playlistId}/remove/${songId}`
+        `${API_URL}/api/playlists/${playlistId}/remove/${songId}`
       );
 
       fetchPlaylists();

@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import StartupLoader from "./components/StartupLoader";
+import API_URL from "./api";
 import { Vibrant } from "node-vibrant/browser";
 import { useTheme } from "./context/ThemeContext";
 import {
@@ -36,10 +39,24 @@ const App = () => {
   const { themes, theme } = useTheme();
 
   const [colors, setColors] = useState({
+    
     primary: "#8B5CF6",
     secondary: "#3B82F6",
   });
+  const [loadingBackend, setLoadingBackend] = useState(true);
+useEffect(() => {
+  const wakeBackend = async () => {
+    try {
+      await axios.get(`${API_URL}`);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadingBackend(false);
+    }
+  };
 
+  wakeBackend();
+}, []);
   // Extract colors from album artwork
   useEffect(() => {
     if (!activeSong?.image) {
@@ -72,6 +89,9 @@ const App = () => {
         });
       });
   }, [activeSong]);
+  if (loadingBackend) {
+  return <StartupLoader />;
+}
 
   return (
     <div

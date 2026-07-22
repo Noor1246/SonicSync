@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useRef, useEffect } from "react";
 import axios from "axios";
+import API_URL from "../../api";
 const Player = ({
   activeSong,
   isPlaying,
@@ -53,7 +54,7 @@ if (!user?._id || !activeSong?._id) return;
 
     try {
       await axios.post(
-        "http://localhost:8000/api/recently-played",
+  `${API_URL}/api/recently-played`,
         {
           user: user._id,
           song: activeSong._id,
@@ -74,7 +75,7 @@ if (!user?._id || !activeSong?._id) return;
       src={
         activeSong?.audio?.startsWith("http")
           ? activeSong.audio
-          : `http://localhost:8000${activeSong?.audio}`
+          : `${API_URL}${activeSong?.audio}`
       }
       loop={repeat}
       onEnded={onEnded}

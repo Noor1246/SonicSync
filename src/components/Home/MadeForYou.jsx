@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import API_URL from "../../api";
 import SongSection from "./SongSection";
 
 
@@ -35,8 +35,8 @@ const MadeForYou = () => {
       }
 
       const res = await axios.get(
-        `http://localhost:8000/api/recommendations/${user.id}`
-      );
+  `${API_URL}/api/recommendations/${user._id}`
+);
 
       if (Array.isArray(res.data)) {
         setSongs(res.data);

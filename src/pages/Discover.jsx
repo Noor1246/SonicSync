@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import API from "../api";
 import {
   getCachedSongs,
   setCachedSongs,
@@ -33,7 +34,7 @@ const Discover = () => {
     return;
   }
 
-  fetch("http://localhost:8000/api/songs")
+  fetch(`${API}/api/songs`)
     .then((res) => res.json())
     .then((data) => {
       setCachedSongs(data);

@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+import API from "../../api";
 export const shazamCoreApi = createApi({
   reducerPath: "shazamCoreApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api",
+    baseUrl: `${API}/api`,
   }),
   endpoints: (builder) => ({
     getTopCharts: builder.query({

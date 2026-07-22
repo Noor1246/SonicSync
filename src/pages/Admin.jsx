@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import API_URL from "../api";
 
 const Admin = () => {
+  const token = localStorage.getItem("token");
   const [songs, setSongs] = useState([]);
   const [stats, setStats] = useState({
     totalSongs: 0,
@@ -29,8 +31,13 @@ const Admin = () => {
   const fetchSongs = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/songs"
-      );
+ `${API_URL}/api/songs`,
+ {
+   headers:{
+     Authorization:`Bearer ${token}`,
+   },
+ }
+);
 
       setSongs(res.data);
 
@@ -41,8 +48,13 @@ const Admin = () => {
   const fetchStats = async () => {
     try {
         const res = await axios.get(
-         "http://localhost:8000/api/admin/stats"
-        );
+ `${API_URL}/api/admin/stats`,
+ {
+   headers:{
+     Authorization:`Bearer ${token}`,
+   },
+ }
+);
 
         setStats(res.data);
 
@@ -76,15 +88,15 @@ const Admin = () => {
       }
 
       await axios.post(
-        "http://localhost:8000/api/songs",
-        formData,
-        {
-          headers: {
-            "Content-Type":
-              "multipart/form-data",
-          },
-        }
-      );
+  `${API_URL}/api/songs`,
+  formData,
+  {
+    headers:{
+      "Content-Type":"multipart/form-data",
+      Authorization:`Bearer ${token}`,
+    },
+  }
+);
 
       toast.success("Song uploaded successfully!");
 
@@ -117,15 +129,20 @@ const Admin = () => {
     try {
 
       await axios.put(
-        `http://localhost:8000/api/songs/${editingId}`,
-        {
-          title: editTitle,
-          artist: editArtist,
-          album: editAlbum,
-          image: editImage,
-          audio: editAudio,
-        }
-      );
+  `${API_URL}/api/songs/${editingId}`,
+  {
+    title: editTitle,
+    artist: editArtist,
+    album: editAlbum,
+    image: editImage,
+    audio: editAudio,
+  },
+  {
+    headers:{
+      Authorization:`Bearer ${token}`,
+    },
+  }
+);
       
       toast.success("Song updated successfully!");
       
@@ -147,8 +164,13 @@ const Admin = () => {
     try {
 
       await axios.delete(
-        `http://localhost:8000/api/songs/${id}`
-      );
+ `${API_URL}/api/songs/${id}`,
+ {
+   headers:{
+     Authorization:`Bearer ${token}`,
+   },
+ }
+);
 
       fetchSongs();
 
@@ -221,7 +243,7 @@ const Admin = () => {
                 src={
                   song.image?.startsWith("http")
                     ? song.image
-                    : `http://localhost:8000${song.image}`
+                    : `${API_URL}${song.image}`
                 }
                 alt={song.title}
                 className="w-16 h-16 rounded-lg object-cover"

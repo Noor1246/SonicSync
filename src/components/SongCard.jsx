@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-
+import API_URL from "../api";
 import {
   FaHeart,
   FaRegHeart,
@@ -42,8 +42,8 @@ const SongCard = ({
 
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/favorites/check/${user._id}/${song._id}`
-        );
+  `${API_URL}/api/favorites/check/${user._id}/${song._id}`
+);
 
         setIsFavorite(res.data.favorite);
       } catch (err) {
@@ -61,15 +61,20 @@ const SongCard = ({
     }
 
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/favorites",
-        {
-          user: user._id,
-          song: song._id,
-        }
-      );
+      setIsFavorite((prev) => !prev);
 
-      setIsFavorite(res.data.favorite);
+try {
+  await axios.post(
+    `${API_URL}/api/favorites`,
+    {
+      user: user._id,
+      song: song._id,
+    }
+  );
+} catch (err) {
+  setIsFavorite((prev) => !prev); // revert if request fails
+  console.log(err);
+}
     } catch (err) {
       console.log(err);
     }
@@ -184,7 +189,7 @@ const SongCard = ({
           src={
             song.image?.startsWith("http")
               ? song.image
-              : `http://localhost:8000${song.image}`
+              :  `${API_URL}${song.image}`
           }
           alt={song.title}
           className={`

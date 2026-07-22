@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArtistCard, Loader, Error } from "../components";
-
+import API_URL from "../api";
 const TopArtists = () => {
   const [artists, setArtists] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
@@ -15,7 +15,7 @@ const TopArtists = () => {
     return;
   }
 
-  fetch("http://localhost:8000/api/artists")
+  fetch(`${API_URL}/api/artists`)
     .then((res) => res.json())
     .then((data) => {
       setArtists(data);

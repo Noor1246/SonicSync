@@ -24,13 +24,13 @@ const addSong = async (req, res) => {
 
     const image =
       req.files?.image
-        ? `/uploads/images/${req.files.image[0].filename}`
+        ? req.files.image[0].path
         : "";
 
 
     const audio =
       req.files?.audio
-        ? `/uploads/audio/${req.files.audio[0].filename}`
+        ? req.files.audio[0].path
         : "";
 
 

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const songRoutes = require("./routes/songRoutes");
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
@@ -8,23 +9,20 @@ const playlistRoutes = require("./routes/playlistRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const artistRoutes = require("./routes/artistRoutes");
 const recentlyPlayedRoutes = require("./routes/recentlyPlayedRoutes");
-require("dotenv").config();
 const recommendationRoutes = require("./routes/recommendationRoutes");
 const statsRoutes = require("./routes/statsRoutes");
 const recentSearchRoutes = require("./routes/recentSearchRoutes");
 const app = express();
-app.use(
-  "/uploads",
-  express.static("uploads")
-);
+
 
 app.use(
-  cors({
-    origin:[
-      "http://localhost:3000"
-    ],
-    credentials:true
-  })
+ cors({
+   origin:[
+     "http://localhost:3000",
+     "https://your-frontend-domain.vercel.app"
+   ],
+   credentials:true
+ })
 );
 app.use(express.json());
 

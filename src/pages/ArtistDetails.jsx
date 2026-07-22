@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import API_URL from "../api";
 import { Loader, Error, SongCard } from "../components";
 
 const ArtistDetails = () => {
@@ -15,7 +15,7 @@ const ArtistDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/artists/${id}`)
+    fetch(`${API_URL}/api/artists/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setArtist(data);

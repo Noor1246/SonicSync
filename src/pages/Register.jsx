@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import API from "../api";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ const Register = () => {
 
     try {
       await axios.post(
-        "http://localhost:8000/api/auth/register",
+        `${API}/api/auth/register`,
         {
           name,
           email,

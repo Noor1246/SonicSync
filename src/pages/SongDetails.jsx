@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-
+import API_URL from "../api";
 import { Error, Loader, RelatedSongs } from "../components";
 
 import {
@@ -40,7 +40,7 @@ const SongDetails = () => {
       try {
 
         const songRes = await axios.get(
-          `http://localhost:8000/api/songs`
+          `${API_URL}/api/songs`
         );
 
 
@@ -60,7 +60,7 @@ const SongDetails = () => {
 
 
         const relatedRes = await axios.get(
-          `http://localhost:8000/api/songs/recommendations/${songid}`
+          `${API_URL}/api/songs/recommendations/${songid}`
         );
 
 
@@ -156,7 +156,7 @@ const SongDetails = () => {
           src={
             songData.image?.startsWith("http")
               ? songData.image
-              : `http://localhost:8000${songData.image}`
+              : `${API_URL}${songData.image}`
           }
           alt={songData.title}
           className="

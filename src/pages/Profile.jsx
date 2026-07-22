@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
-
+import API_URL from "../api";
 const Profile = () => {
 
-  const storedUser = localStorage.getItem("user");
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
-const user = storedUser 
-? JSON.parse(storedUser)
-: null;
+const user = storedUser
+  ? {
+      ...storedUser,
+      _id: storedUser._id || storedUser.id,
+    }
+  : null;
   const { theme, setTheme, themes } = useTheme();
 
 
@@ -39,19 +42,18 @@ const user = storedUser
   try {
 
       const fav = await axios.get(
-        `http://localhost:8000/api/favorites/${user._id}`
+        `${API_URL}/api/favorites/${user._id}`
       );
 
 
       const rec = await axios.get(
-        `http://localhost:8000/api/recently-played/${user._id}`
+        `${API_URL}/api/recently-played/${user._id}`
       );
 
 
       const play = await axios.get(
-        `http://localhost:8000/api/playlists/${user._id}`
+        `${API_URL}/api/playlists/${user._id}`
       );
-
 
       console.log("FAVORITES:", fav.data);
       console.log("RECENT:", rec.data);
@@ -568,8 +570,7 @@ src={
 song.image?.startsWith("http")
 ?
 song.image
-:
-`http://localhost:8000${song.image}`
+: `${API_URL}${song.image}`
 }
 alt={song.title}
 className="

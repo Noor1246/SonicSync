@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
-
+import API_URL from "../api";
 const AddToPlaylist = ({ song }) => {
   const [playlists, setPlaylists] = useState([]);
   const [show, setShow] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
+const user = {
+  ...storedUser,
+  _id: storedUser?._id || storedUser?.id,
+};
   const fetchPlaylists = async () => {
     if (!user) return;
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/playlists/${user._id}`
-      );
+  `${API_URL}/api/playlists/${user._id}`
+);
 
       setPlaylists(res.data);
     } catch (err) {
@@ -29,7 +33,7 @@ const AddToPlaylist = ({ song }) => {
   const addSong = async (playlistId) => {
     try {
       await axios.post(
-        `http://localhost:8000/api/playlists/${playlistId}/add`,
+  `${API_URL}/api/playlists/${playlistId}/add`,
         {
           songId: song._id,
         }
@@ -53,7 +57,7 @@ const AddToPlaylist = ({ song }) => {
     try {
       // Create playlist
       const res = await axios.post(
-        "http://localhost:8000/api/playlists",
+  `${API_URL}/api/playlists`,
         {
           name,
           user: user._id,
@@ -64,7 +68,7 @@ const AddToPlaylist = ({ song }) => {
 
       // Automatically add current song
       await axios.post(
-        `http://localhost:8000/api/playlists/${newPlaylist._id}/add`,
+  `${API_URL}/api/playlists/${newPlaylist._id}/add`,
         {
           songId: song._id,
         }

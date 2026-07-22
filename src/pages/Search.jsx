@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import API_URL from "../api";
 import SongCard from "../components/SongCard";
 
 const Search = () => {
@@ -20,16 +20,23 @@ const Search = () => {
     const searchSongs = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/songs/search?query=${searchTerm}`
-        );
+  `${API_URL}/api/songs/search?query=${searchTerm}`
+);
 
         setSongs(res.data);
 
-        const user = JSON.parse(localStorage.getItem("user"));
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+
+const user = storedUser
+  ? {
+      ...storedUser,
+      _id: storedUser._id || storedUser.id,
+    }
+  : null;
 
         if (user && searchTerm?.trim()) {
           await axios.post(
-            "http://localhost:8000/api/recent-searches",
+  `${API_URL}/api/recent-searches`,
             {
               user: user._id,
               query: searchTerm,
@@ -52,13 +59,20 @@ const Search = () => {
   // Fetch Recent Searches
   const fetchRecentSearches = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+const user = storedUser
+  ? {
+      ...storedUser,
+      _id: storedUser._id || storedUser.id,
+    }
+  : null;
 
       if (!user) return;
 
       const res = await axios.get(
-        `http://localhost:8000/api/recent-searches/${user._id}`
-      );
+  `${API_URL}/api/recent-searches/${user._id}`
+);
 
       setRecentSearches(res.data);
 

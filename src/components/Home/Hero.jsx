@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaPlay, FaHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-
+import API_URL from "../../api";
 import {
   playPause,
   setActiveSong,
@@ -38,8 +38,8 @@ const user = {
 
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/favorites/check/${user._id}/${featuredSong._id}`
-        );
+  `${API_URL}/api/favorites/check/${user._id}/${featuredSong._id}`
+);
 
         setIsFavorite(res.data.favorite);
       } catch (err) {
@@ -78,24 +78,19 @@ dispatch(playPause(true));
     return;
   }
 
+  // Instant UI update
+  const previous = isFavorite;
+  setIsFavorite(!previous);
+
   try {
-    const res = await axios.post(
-      "http://localhost:8000/api/favorites",
-      {
-        user: user._id,
-        song: featuredSong._id,
-      }
-    );
-
-
-    console.log("FAVORITE RESPONSE:", res.data);
-
-
-    // toggle UI immediately
-    setIsFavorite((prev) => !prev);
-
-
+    await axios.post(`${API_URL}/api/favorites`, {
+      user: user._id,
+      song: featuredSong._id,
+    });
   } catch (err) {
+    // Revert if request fails
+    setIsFavorite(previous);
+
     console.log(
       "FAVORITE ERROR:",
       err.response?.data || err

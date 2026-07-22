@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import API from "../api";
 import { Loader, Error, SongCard } from "../components";
 
 import { getCachedSongs, setCachedSongs } from "../utils/songCache";
@@ -24,7 +25,7 @@ const TopCharts = () => {
         return;
       }
 
-      const res = await axios.get("http://localhost:8000/api/songs");
+      const res = await axios.get(`${API}/api/songs`);
 
       setSongs(res.data);
       setCachedSongs(res.data);

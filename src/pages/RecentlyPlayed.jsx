@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import API_URL from "../api";
 import SongCard from "../components/SongCard";
 
 const RecentlyPlayed = () => {
@@ -27,7 +27,7 @@ const user = {
     }
 
     const res = await axios.get(
-      `http://localhost:8000/api/recently-played/${user._id}`
+      `${API_URL}/api/recently-played/${user._id}`
     );
 
     const recentSongs = res.data

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import API_URL from "../api";
 import SongCard from "../components/SongCard";
 
 const Favorites = () => {
@@ -30,8 +30,8 @@ const Favorites = () => {
 
 
       const res = await axios.get(
-        `http://localhost:8000/api/favorites/${user._id || user.id}`
-      );
+  `${API_URL}/api/favorites/${user._id || user.id}`
+);
 
 
       console.log("FAVORITES RESPONSE:", res.data);
