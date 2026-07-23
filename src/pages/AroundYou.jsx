@@ -89,7 +89,7 @@ const AroundYou = () => {
     <div className="flex flex-col">
 
       <h2 className="font-bold text-3xl text-white text-left mt-4">
-        Around You 🇮🇳
+        Around You 
       </h2>
 
       <p className="text-gray-400 mt-2 mb-6">
