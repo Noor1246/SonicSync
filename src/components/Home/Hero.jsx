@@ -106,10 +106,9 @@ dispatch(playPause(true));
         relative
         w-full
 
-        min-h-[340px]
-sm:min-h-[360px]
-md:h-[260px]
-lg:h-[280px]
+        h-[340px]
+md:h-[280px]
+lg:h-[300px]
 
         rounded-3xl
         overflow-hidden
@@ -163,30 +162,38 @@ lg:h-[280px]
 
       {/* Content */}
       <div
-        className="
-          relative
-          z-10
+  className="
+    relative
+    z-10
 
-          h-full
+    h-full
 
-          flex
-flex-col
-md:flex-row
-justify-center
-md:justify-between
+    flex
+    flex-col
+    md:flex-row
 
-          px-5
-          sm:px-8
-          lg:px-10
-        "
-      >
+    items-center
+    justify-between
+
+    px-6
+    md:px-10
+
+    py-6
+    md:py-0
+  "
+>
         {/* Left */}
         <div
 className="
 w-full
 md:max-w-[60%]
+
 text-center
 md:text-left
+
+flex
+flex-col
+justify-center
 "
 >
 
@@ -206,9 +213,8 @@ md:text-left
             className="
               mt-3
 
-              text-xl
-sm:text-2xl
-md:text-3xl
+              text-2xl
+sm:text-3xl
 lg:text-4xl
 
               font-black
@@ -316,10 +322,11 @@ sm:py-2.5
           className="
             relative
 
-            flex
+            hidden
 md:flex
-mt-6
-md:mt-0
+items-center
+justify-center
+flex-shrink-0
 
             items-center
             justify-center
@@ -333,10 +340,8 @@ md:mt-0
             className="
               absolute
 
-              w-32
-h-32
-md:w-52
-md:h-52
+              w-52
+h-52
 
               rounded-full
 
@@ -357,12 +362,8 @@ md:h-52
             className="
               relative
 
-              w-24
-h-24
-sm:w-28
-sm:h-28
-md:w-36
-md:h-36
+              w-36
+h-36
 lg:w-44
 lg:h-44
 
