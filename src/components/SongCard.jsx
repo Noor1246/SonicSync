@@ -194,6 +194,9 @@ sm:w-[210px]
               :  `${API_URL}${song.image}`
           }
           alt={song.title}
+          loading="eager"
+  decoding="async"
+  referrerPolicy="no-referrer"
           className={`
             block
             w-full
