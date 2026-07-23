@@ -321,20 +321,20 @@ useEffect(() => {
 
             {/* Right Panel */}
             <div
-              className="
-                w-full
-                xl:w-[360px]
-                xl:sticky
-                top-0
-                h-fit
-                xl:ml-6
-                mb-8
-                xl:mb-0
-                flex-shrink-0
-              "
-            >
-              <TopPlay />
-            </div>
+  className="
+    hidden
+    xl:block
+
+    xl:w-[360px]
+    xl:sticky
+    top-0
+    h-fit
+    xl:ml-6
+    flex-shrink-0
+  "
+>
+  <TopPlay />
+</div>
 
           </div>
 
