@@ -189,10 +189,10 @@ sm:w-[210px]
 
         <img
           src={
-            song.image?.startsWith("http")
-              ? song.image
-              :  `${API_URL}${song.image}`
-          }
+  song.image?.startsWith("http")
+    ? song.image.replace("100x100bb.jpg", "600x600bb.jpg")
+    : `${API_URL}${song.image}`
+}
           alt={song.title}
           loading="eager"
   decoding="async"
