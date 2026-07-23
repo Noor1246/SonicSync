@@ -98,6 +98,7 @@ useEffect(() => {
     <div
   className={`relative flex h-screen overflow-hidden ${themes[theme].background}`}
 >
+  <ScrollToTop />
 
       {/* Sidebar */}
       <Sidebar />
@@ -164,7 +165,7 @@ useEffect(() => {
 
         {/* Foreground */}
 <div className="relative z-10 flex flex-col flex-1 min-h-0">
-<ScrollToTop />
+
   {/* Search */}
   <div className="px-3 sm:px-3 pt-3 pb-1">
   <Searchbar />
@@ -176,7 +177,7 @@ useEffect(() => {
           <div
   className="
     flex
-    flex-col-reverse
+    flex-col
     xl:flex-row
 
     flex-1
