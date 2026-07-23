@@ -6,6 +6,7 @@ import StartupLoader from "./components/StartupLoader";
 import API_URL from "./api";
 import { Vibrant } from "node-vibrant/browser";
 import { useTheme } from "./context/ThemeContext";
+import ScrollToTop from "./components/ScrollToTop";
 import {
   Searchbar,
   Sidebar,
@@ -163,7 +164,7 @@ useEffect(() => {
 
         {/* Foreground */}
 <div className="relative z-10 flex flex-col flex-1 min-h-0">
-
+<ScrollToTop />
   {/* Search */}
   <div className="px-3 sm:px-3 pt-3 pb-1">
   <Searchbar />
@@ -184,6 +185,8 @@ useEffect(() => {
     overflow-y-auto
 
     hide-scrollbar
+    hide-scrollbar
+main-scroll
 
     px-3
     sm:px-6
@@ -191,6 +194,8 @@ useEffect(() => {
     pb-36
   "
 >
+  {/* Foreground */}
+
             {/* Main Pages */}
             <div className="flex-1 min-w-0 h-fit">
 
