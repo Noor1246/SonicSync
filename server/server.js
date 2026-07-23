@@ -1,4 +1,7 @@
 require("dotenv").config();
+console.log("Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
+console.log("API Key:", process.env.CLOUDINARY_API_KEY);
+console.log("Secret Exists:", !!process.env.CLOUDINARY_API_SECRET);
 const songRoutes = require("./routes/songRoutes");
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
