@@ -9,6 +9,15 @@ const songSchema = new mongoose.Schema(
     artistImage: String,
     audio: String,
     duration: String,
+    genre: {
+  type: String,
+  default: "Pop",
+},
+
+language: {
+  type: String,
+  default: "English",
+},
   },
   { timestamps: true }
 );
