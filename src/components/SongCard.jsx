@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import API_URL from "../api";
+import toast from "react-hot-toast";
 import {
   FaHeart,
   FaRegHeart,
@@ -56,7 +57,7 @@ const SongCard = ({
 
   const handleFavorite = async () => {
     if (!user) {
-      alert("Please login first");
+      toast.success("Please login first");
       return;
     }
 
@@ -177,15 +178,23 @@ sm:w-[210px]
       {/* Image */}
 
       <div
-        className="
-          relative
-          w-full
-          aspect-square
-          overflow-hidden
-          rounded-t-3xl
-          group
-        "
-      >
+  onClick={() => {
+    if (isCurrentSong && isPlaying) {
+      handlePauseClick();
+    } else {
+      handlePlayClick();
+    }
+  }}
+  className="
+    relative
+    w-full
+    aspect-square
+    overflow-hidden
+    rounded-t-3xl
+    group
+    cursor-pointer
+  "
+>
 
         <img
           src={

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import API_URL from "../api";
+import toast from "react-hot-toast";
 const AddToPlaylist = ({ song }) => {
   const [playlists, setPlaylists] = useState([]);
   const [show, setShow] = useState(false);
@@ -31,59 +32,63 @@ const user = {
   }, []);
 
   const addSong = async (playlistId) => {
-    try {
-      await axios.post(
-  `${API_URL}/api/playlists/${playlistId}/add`,
-        {
-          songId: song._id,
-        }
-      );
+  setShow(false);
 
-      alert("Added to playlist 🎵");
-      setShow(false);
+  // Show feedback immediately
+  toast.success("Added to playlist 🎵");
 
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  try {
+    await axios.post(
+      `${API_URL}/api/playlists/${playlistId}/add`,
+      {
+        songId: song._id,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    toast.error("Failed to add song.");
+  }
+};
 
   const handleCreatePlaylist = async () => {
-    if (!user) return;
+  if (!user) return;
 
-    const name = prompt("Enter playlist name");
+  const name = prompt("Enter playlist name");
 
-    if (!name || !name.trim()) return;
+  if (!name || !name.trim()) return;
 
-    try {
-      // Create playlist
-      const res = await axios.post(
-  `${API_URL}/api/playlists`,
-        {
-          name,
-          user: user._id,
-        }
-      );
+  try {
+    const res = await axios.post(
+      `${API_URL}/api/playlists`,
+      {
+        name,
+        user: user._id,
+      }
+    );
 
-      const newPlaylist = res.data;
+    const newPlaylist = res.data;
 
-      // Automatically add current song
-      await axios.post(
-  `${API_URL}/api/playlists/${newPlaylist._id}/add`,
+    // Update UI immediately
+    setPlaylists((prev) => [...prev, newPlaylist]);
+    setShow(false);
+
+    toast.success("Playlist created 🎉");
+
+    // Add the song in the background
+    axios
+      .post(
+        `${API_URL}/api/playlists/${newPlaylist._id}/add`,
         {
           songId: song._id,
         }
-      );
+      )
+      .catch(console.log);
 
-      await fetchPlaylists();
-
-      alert("Playlist created and song added 🎵");
-
-      setShow(false);
-
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  } catch (err) {
+    console.log(err);
+    toast.error("Failed to create playlist.");
+  }
+};
 
   return (
     <div className="relative overflow-visible">
