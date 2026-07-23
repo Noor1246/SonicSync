@@ -106,7 +106,7 @@ dispatch(playPause(true));
         relative
         w-full
 
-        h-[340px]
+        min-h-[300px]
 md:h-[280px]
 lg:h-[300px]
 
@@ -166,7 +166,7 @@ lg:h-[300px]
     relative
     z-10
 
-    h-full
+    min-h-full
 
     flex
     flex-col
@@ -253,7 +253,8 @@ flex-wrap
 justify-center
 md:justify-start
 gap-3
-mt-6
+mt-4
+md:mt-6
             "
           >
             <button
