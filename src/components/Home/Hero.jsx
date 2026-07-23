@@ -106,7 +106,7 @@ dispatch(playPause(true));
         relative
         w-full
 
-        min-h-[300px]
+        min-h-[240px]
 md:h-[280px]
 lg:h-[300px]
 
@@ -178,7 +178,7 @@ lg:h-[300px]
     px-6
     md:px-10
 
-    py-6
+    py-4
     md:py-0
   "
 >
