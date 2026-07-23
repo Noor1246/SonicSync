@@ -180,8 +180,7 @@ sm:w-[210px]
         className="
           relative
           w-full
-          h-36
-          sm:h-48
+          aspect-square
           overflow-hidden
           rounded-t-3xl
           group
@@ -196,6 +195,7 @@ sm:w-[210px]
           }
           alt={song.title}
           className={`
+            block
             w-full
             h-full
             object-cover
