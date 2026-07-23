@@ -20,14 +20,13 @@ const MadeForYou = () => {
 
         const userId = storedUser._id || storedUser.id;
 
-        console.log("User:", storedUser);
-        console.log("User ID:", userId);
+        
 
         const res = await axios.get(
           `${API_URL}/api/recommendations/${userId}`
         );
 
-        console.log("Recommendations:", res.data);
+        
 
         if (Array.isArray(res.data)) {
           setSongs(res.data);
@@ -40,7 +39,20 @@ const MadeForYou = () => {
     fetchRecommendations();
   }, []);
 
-  if (!songs.length) return null;
+ 
+
+return (
+  <>
+    
+
+    <SongSection
+      title="✨ Made For You"
+      songs={songs}
+      isPlaying={isPlaying}
+      activeSong={activeSong}
+    />
+  </>
+);
 
   return (
     <SongSection
