@@ -107,8 +107,10 @@ try {
         flex
         flex-col
 
-        min-w-[210px]
-        w-[210px]
+        min-w-[160px]
+w-[160px]
+sm:min-w-[210px]
+sm:w-[210px]
 
         rounded-3xl
 
@@ -178,7 +180,8 @@ try {
         className="
           relative
           w-full
-          h-48
+          h-36
+          sm:h-48
           overflow-hidden
           rounded-t-3xl
           group
@@ -272,7 +275,7 @@ try {
       </div>
             {/* Song Details */}
 
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-3 sm:p-4 flex flex-col flex-1">
 
         <h2
           className="
