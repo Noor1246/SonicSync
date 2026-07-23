@@ -106,10 +106,10 @@ dispatch(playPause(true));
         relative
         w-full
 
-        h-[220px]
-        sm:h-[240px]
-        md:h-[260px]
-        lg:h-[280px]
+        min-h-[340px]
+sm:min-h-[360px]
+md:h-[260px]
+lg:h-[280px]
 
         rounded-3xl
         overflow-hidden
@@ -170,8 +170,10 @@ dispatch(playPause(true));
           h-full
 
           flex
-          items-center
-          justify-between
+flex-col
+md:flex-row
+justify-center
+md:justify-between
 
           px-5
           sm:px-8
@@ -179,7 +181,14 @@ dispatch(playPause(true));
         "
       >
         {/* Left */}
-        <div className="max-w-[60%]">
+        <div
+className="
+w-full
+md:max-w-[60%]
+text-center
+md:text-left
+"
+>
 
           <p
             className="
@@ -197,9 +206,10 @@ dispatch(playPause(true));
             className="
               mt-3
 
-              text-2xl
-              sm:text-3xl
-              lg:text-4xl
+              text-xl
+sm:text-2xl
+md:text-3xl
+lg:text-4xl
 
               font-black
 
@@ -233,10 +243,11 @@ dispatch(playPause(true));
           <div
             className="
               flex
-              gap-3
-              flex-wrap
-
-              mt-5
+flex-wrap
+justify-center
+md:justify-start
+gap-3
+mt-6
             "
           >
             <button
@@ -246,8 +257,10 @@ dispatch(playPause(true));
                 items-center
                 gap-2
 
-                px-5
-                py-2.5
+                px-4
+py-2
+sm:px-5
+sm:py-2.5
 
                 rounded-full
 
@@ -303,8 +316,10 @@ dispatch(playPause(true));
           className="
             relative
 
-            hidden
-            md:flex
+            flex
+md:flex
+mt-6
+md:mt-0
 
             items-center
             justify-center
@@ -318,8 +333,10 @@ dispatch(playPause(true));
             className="
               absolute
 
-              w-52
-              h-52
+              w-32
+h-32
+md:w-52
+md:h-52
 
               rounded-full
 
@@ -340,8 +357,14 @@ dispatch(playPause(true));
             className="
               relative
 
-              w-36
-              h-36
+              w-24
+h-24
+sm:w-28
+sm:h-28
+md:w-36
+md:h-36
+lg:w-44
+lg:h-44
 
               lg:w-44
               lg:h-44
